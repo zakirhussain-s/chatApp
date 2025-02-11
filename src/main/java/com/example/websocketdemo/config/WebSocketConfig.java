@@ -4,16 +4,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.*;
 
-/**
- * Created by rajeevkumarsingh on 24/07/17.
- */
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/wss").withSockJS();
+        // Adding setAllowedOrigins("*") to allow connections in production
+        registry.addEndpoint("/wss")
+               .setAllowedOrigins("*")
+               .withSockJS();
     }
 
     @Override
